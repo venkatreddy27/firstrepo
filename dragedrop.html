@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drage and Drop Example</title>
+<style>
+#dropbox{
+float: left;
+width: 100px;
+height: 100px;
+margin-left: 50px;
+border: 1px solid #999999;
+}
+#picturebox{
+float: left;
+width: 255px;
+border: 1px solid #999999;
+}
+#picturesbox > img{
+margin: 5px;
+}
+</style>
+
+</head>
+
+<body>
+<section id="picturebox">
+<img id="image" src="bg7.jpg" >
+</section>
+<section id="dropbox">
+Drag and drop the image here
+</section>
+    
+<script>
+function initiate(){
+    source1=document.getElementById('image');
+    source1.addEventListener('dragstart', dragged, false);
+    drop=document.getElementById('dropbox');
+    drop.addEventListener('dragenter', function(e){ e.preventDefault(); }, false);
+    drop.addEventListener('dragover', function(e){ e.preventDefault(); }, false);
+    drop.addEventListener('drop', dropped, false);
+}
+function dragged(e){
+    var code='<img src="'+source1.getAttribute('src')+'">';
+  e.dataTransfer.setData('Text', code);
+}
+function dropped(e){
+    e.preventDefault();
+    drop.innerHTML=e.dataTransfer.getData('Text');
+}
+window.addEventListener('load', initiate, false);
+    
+</script>
+</body>
+</html>
